@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect
+r from flask import Flask, request, render_template, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 from surveys import satisfaction_survey as survey
 
@@ -24,11 +24,9 @@ def start_survey():
 
 
 @app.route("/answer", methods=["POST"])
-"""Handle and save response and redirect to the next question"""
-
 def handle_question():
     choice = request.form['answer']
-    
+"""Handle and save response and redirect to the next question"""
     # add this response to the session
     responses = session[responses_key]
     responses.append(choice)
@@ -54,3 +52,7 @@ def show_question(qid):
     if(len(responses == !qid):
         flash(f"Invalid question id: {qid}.")
         return redirect(f"/questions/{len(responses)}") 
+
+@app.route("/complete")
+def complete():
+    return render_template("completion.html")
